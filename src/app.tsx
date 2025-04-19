@@ -1,43 +1,29 @@
-import { useState } from 'preact/hooks'
-import preactLogo from './assets/preact.svg'
-import viteLogo from '/vite.svg'
-import './app.css'
+import { load } from '@shadow-bridge/preact';
+import { useState } from 'preact/hooks';
+
+const AntdBlock = load<any>({
+  script: 'https://guoyunhe.github.io/sb-react-component-vite-example/antd.js',
+  styles: ['https://guoyunhe.github.io/sb-react-component-vite-example/antd.css'],
+  prefetch: true,
+  loadingFallback: () => <span>Loading</span>,
+  failedFallback: (error) => <span>Failed to load: {error.message}</span>,
+});
 
 export function App() {
-  const [count, setCount] = useState(0)
+  const [open, setOpen] = useState(false);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://preactjs.com" target="_blank">
-          <img src={preactLogo} class="logo preact" alt="Preact logo" />
-        </a>
-      </div>
-      <h1>Vite + Preact</h1>
-      <div class="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/app.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p>
-        Check out{' '}
-        <a
-          href="https://preactjs.com/guide/v10/getting-started#create-a-vite-powered-preact-app"
-          target="_blank"
-        >
-          create-preact
-        </a>
-        , the official Preact + Vite starter
-      </p>
-      <p class="read-the-docs">
-        Click on the Vite and Preact logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <button onClick={() => setOpen(true)}>Open Ant Design Modal</button>
+      <AntdBlock
+        open={open}
+        onCancel={() => {
+          setOpen(false);
+        }}
+        onOk={() => {
+          setOpen(false);
+        }}
+      />
+    </div>
+  );
 }
