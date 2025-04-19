@@ -1,7 +1,7 @@
 import { load } from '@shadow-bridge/preact';
 import { useState } from 'preact/hooks';
 
-const AntdBlock = load<any>({
+const ReactAntd = load<any>({
   script: 'https://guoyunhe.github.io/sb-react-component-vite-example/antd.js',
   styles: ['https://guoyunhe.github.io/sb-react-component-vite-example/antd.css'],
   prefetch: true,
@@ -15,7 +15,7 @@ export function App() {
   return (
     <div>
       <button onClick={() => setOpen(true)}>Open Ant Design Modal</button>
-      <AntdBlock
+      <ReactAntd
         open={open}
         onCancel={() => {
           setOpen(false);
